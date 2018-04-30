@@ -5,7 +5,9 @@
   * 星云链
   * [Dapp](jie-shao/untitled.md)
 * 简易教程
-  * 快速上手
+  * 开发流程
+  * [快速上手](ji/kuai-su-shang-shou/README.md)
+    * 创建账户
   * 环境安装
   * Case展示
 * API
