@@ -13,14 +13,14 @@
     * 部署智能合约
     * 调用
   * [环境安装](tutorials/neb-installation.md)
-  * Case展示
-* API
-  * Contract
-  * Contract API
+  * [Case展示](tutorials/show-cases.md)
+* [API](api/README.md)
+  * [Contract](api/contract.md)
+  * [Contract API](api/contract-api.md)
   * [RPC API](api/rpc-api.md)
 * NRC
-  * NRC20
-  * NRC721
+  * [NRC20](nrc/nrc20.md)
+  * [NRC721](nrc/nrc721.md)
 * 工具
 * 浏览器
 * 社区
