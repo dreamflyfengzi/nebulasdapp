@@ -1,9 +1,9 @@
 # Table of contents
 
 * Initial page
-* [介绍](jie-shao/README.md)
+* [介绍](introduction/README.md)
   * 星云链
-  * [Dapp](jie-shao/untitled.md)
+  * [Dapp](introduction/dapp.md)
 * 简易教程
   * 开发流程
   * [快速上手](ji/kuai-su-shang-shou/README.md)
