@@ -1,7 +1,3 @@
----
-description: 通过WebWallet来演示如何编写智能合约，快速部署智能合约和调用执行智能合约
----
-
 # 快速上手
 
 ## Web Wallet

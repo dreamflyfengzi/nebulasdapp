@@ -5,8 +5,8 @@
 ## Golang环境搭建
 
 | Components | Version | Description |
-|----------|-------------|-------------|
-|[Golang](https://golang.org) | >= 1.9.2| The Go Programming Language |
+| --- | --- | --- |
+| [Golang](https://golang.org) | &gt;= 1.9.2 | The Go Programming Language |
 
 我们会分别介绍Mac OSX和Linux两种系统下golang环境的搭建。
 
@@ -68,60 +68,70 @@ git checkout master
 
 在linux环境下，由于ubuntu和centos系统的用户偏多，我们将分别介绍这两个主流环境下RocksDB的安装。
 
-##### Ubuntu
+**Ubuntu**
 
 * 首先安装RocksDB所需依赖库
-    ```bash
+
+  ```bash
     apt-get update
     apt-get -y install build-essential libgflags-dev libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev
-    ```
+  ```
+
 * 下载源码并编译安装
-    ```bash
+
+  ```bash
     git clone https://github.com/facebook/rocksdb.git
     cd rocksdb & make shared_lib && make install-shared
-    ```
+  ```
 
-##### Centos
+**Centos**
 
 * 首先安装RocksDB所需依赖库
-    ```bash
+
+  ```bash
     yum -y install epel-release && yum -y update
     yum -y install gflags-devel snappy-devel zlib-devel bzip2-devel gcc-c++  libstdc++-devel
-    ```
+  ```
+
 * 下载源码并编译安装
-    ```bash
+
+  ```bash
     git clone https://github.com/facebook/rocksdb.git
     cd rocksdb & make shared_lib && make install-shared
-    ```
+  ```
 
 ### 安装Go依赖库
 
 在Go-Nebulas中，Go的三方库都通过[Dep](https://github.com/golang/dep)来做管理。
 
 | Components | Version | Description |
-|----------|-------------|-------------|
-[Dep](https://github.com/golang/dep) | >= 0.3.1 | Dep is a dependency management tool for Go. |
+| --- | --- | --- |
+
+
+[Dep](https://github.com/golang/dep) \| &gt;= 0.3.1 \| Dep is a dependency management tool for Go. \|
 
 #### 安装Dep工具
 
 我们同样分别介绍Mac OSX和Linux下Dep的安装方法。
 
-##### Mac OSX
+**Mac OSX**
 
 * 通过[Homebrew](https://brew.sh/)直接安装并升级Dep
-    ```bash
+
+  ```bash
     brew install dep
     brew upgrade dep
-    ```
+  ```
 
-##### Linux
+**Linux**
 
 * 通过源码来安装Dep
-    ```bash
+
+  ```bash
     cd /usr/local/bin/
     wget https://github.com/golang/dep/releases/download/v0.3.2/dep-linux-amd64
     ln -s dep-linux-amd64 dep
-    ```
+  ```
 
 #### 下载Go三方库
 
@@ -133,6 +143,7 @@ make dep
 ```
 
 > 提示: `make dep`将会下载很多依赖库。在部分地区，这个过程可能比较耗时。所以，我们提供了依赖库的压缩包[vendor.tar.gz](http://ory7cn4fx.bkt.clouddn.com/vendor.tar.gz)。可以使用下列指令通过压缩包来安装GO依赖库。
+>
 > ```bash
 > wget http://ory7cn4fx.bkt.clouddn.com/vendor.tar.gz
 > cd $GOPATH/src/github.com/nebulasio/go-nebulas
@@ -159,7 +170,7 @@ make build
 
 编译成功后，将会看到如下信息。
 
-![make build](resources/101-01-make-build.png)
+![make build](https://github.com/dreamflyfengzi/nebulasdapp/tree/175c8feafcd8552d0fa6b0d97f834ec8c10902b3/tutorials/resources/101-01-make-build.png)
 
 ## 运行星云链
 
@@ -169,7 +180,7 @@ make build
 
 #### 创世区块配置
 
-```protobuf
+```text
 meta {
   # 每条链的唯一标识
   # 每个区块和交易只会属于一条唯一的链，保证安全性
@@ -208,7 +219,7 @@ token_distribution [
 
 #### 星云节点配置文件
 
-```protobuf
+```text
 # 网络配置
 network {
   # 对于全网第一个节点，不需要配置seed
@@ -291,7 +302,6 @@ stats {
         password: "admin"
     }
 }
-
 ```
 
 A lot of examples can be found in `$GOPATH/src/github.com/nebulasio/go-nebulas/conf/`
@@ -309,7 +319,7 @@ cd $GOPATH/src/github.com/nebulasio/go-nebulas
 
 启动成功的话，将会看到如下信息，有`Started Neblet`的日志输出。
 
-![seed node start](resources/101-01-seed-node-start.png)
+![seed node start](https://github.com/dreamflyfengzi/nebulasdapp/tree/175c8feafcd8552d0fa6b0d97f834ec8c10902b3/tutorials/resources/101-01-seed-node-start.png)
 
 默认情况下，使用配置文件`conf/default/config.conf`启动的节点不是矿工节点。
 
@@ -322,19 +332,19 @@ cd $GOPATH/src/github.com/nebulasio/go-nebulas
 
 在这个节点启动后，你会先看到如下信息，表示当前节点正在找种子节点同步。
 
-![start sync](resources/101-01-start-sync.png)
+![start sync](https://github.com/dreamflyfengzi/nebulasdapp/tree/175c8feafcd8552d0fa6b0d97f834ec8c10902b3/tutorials/resources/101-01-start-sync.png)
 
 等待一会儿，将会看到如下信息，表示当前节点已经连上了seed节点完成了同步。
 
-![finish sync](resources/101-01-finish-sync.png)
+![finish sync](https://github.com/dreamflyfengzi/nebulasdapp/tree/175c8feafcd8552d0fa6b0d97f834ec8c10902b3/tutorials/resources/101-01-finish-sync.png)
 
 再等待几分钟，你会看到如下信息，表示当前矿工节点挖出了第一个区块。
 
-![finish sync](resources/101-01-mint.png)
+![finish sync](https://github.com/dreamflyfengzi/nebulasdapp/tree/175c8feafcd8552d0fa6b0d97f834ec8c10902b3/tutorials/resources/101-01-mint.png)
 
-> 提示: 目前的DPoS共识算法，会有21个节点轮流出块。由于我们只启动了21个矿工节点中的一个矿工节点，所以每隔15*21s才出一个块。你可以启动更多的矿工节点，填补的空缺。但是需要注意，多个节点间的端口号不要相互冲突了。
+> 提示: 目前的DPoS共识算法，会有21个节点轮流出块。由于我们只启动了21个矿工节点中的一个矿工节点，所以每隔15\*21s才出一个块。你可以启动更多的矿工节点，填补的空缺。但是需要注意，多个节点间的端口号不要相互冲突了。
 
 ### 下一章
 
-[在星云链上发送交易](https://github.com/nebulasio/wiki/blob/master/tutorials/%5BEnglish%5D%20Nebulas%20101%20-%2002%20Transaction.md)
+[在星云链上发送交易](https://github.com/nebulasio/wiki/blob/master/tutorials/[English]%20Nebulas%20101%20-%2002%20Transaction.md)
 
