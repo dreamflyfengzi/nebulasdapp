@@ -1,12 +1,12 @@
 # Table of contents
 
 * Initial page
-* [介绍](introduction/README.md)
+* 介绍
   * 星云链
   * [Dapp](introduction/dapp.md)
 * 简易教程
   * 开发流程
-  * [快速上手](ji/kuai-su-shang-shou/README.md)
+  * [快速上手](tutorials/start/README.md)
     * 创建账户
   * 环境安装
   * Case展示
