@@ -13,7 +13,7 @@
 * API
   * Contract
   * Contract API
-  * RPC API
+  * [RPC API](api/rpc-api.md)
 * NRC
   * NRC20
   * NRC721
