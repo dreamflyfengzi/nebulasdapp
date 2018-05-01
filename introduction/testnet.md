@@ -1,18 +1,18 @@
-# 主网
+# 测试网
 
 ## Introduction
 
-We are glad to release Nebulas Mainnet here. Please join and enjoy Nebulas Mainnet.
+We are glad to release Nebulas Testnet here. It simulate the Nebulas network and NVM, and allow developers to interact with Nebulas without paying the cost of gas.
 
 ```text
-https://github.com/nebulasio/go-nebulas/tree/master
+https://github.com/nebulasio/go-nebulas/tree/testnet
 ```
 
 ### Configuration
 
-The Mainnet configuration files are in folder [`mainnet/conf`](https://github.com/nebulasio/go-nebulas/tree/master/mainnet/conf), including
+The testnet configuration files are in folder [`testnet/conf`](https://github.com/nebulasio/go-nebulas/tree/testnet/testnet/conf) under `testnet` branch, including
 
-### genesis.conf
+#### genesis.conf
 
 All configurable information about genesis block is defined in genesis.conf, including
 
@@ -22,7 +22,7 @@ All configurable information about genesis block is defined in genesis.conf, inc
 
 > _Attention_: DO NOT change the genesis.conf.
 
-### config.conf
+#### config.conf
 
 All configurable information about runtime is defined in config.conf.
 
@@ -31,6 +31,10 @@ Please check the [`template.conf`](https://github.com/dreamflyfengzi/nebulasdapp
 > _Tips_: the official seed node info is as below,
 
 ```javascript
-seed:["/ip4/52.2.205.12/tcp/8680/ipfs/QmQK7W8wrByJ6So7rf84sZzKBxMYmc1i4a7JZsne93ysz5","/ip4/52.56.55.238/tcp/8680/ipfs/QmVy9AHxBpd1iTvECDR7fvdZnqXeDhnxkZJrKsyuHNYKAh","/ip4/13.251.33.39/tcp/8680/ipfs/QmVm5CECJdPAHmzJWN2X7tP335L5LguGb9QLQ78riA9gw3"]
+seed:["/ip4/52.60.150.236/tcp/8680/ipfs/QmVJikqWQst13QsgdCLBjgcSWwpAAdZjoExGdvK3r2CNhv"]
 ```
 
+
+#### Token Claim
+
+Every email can claim some tokens every day at [here](https://testnet.nebulas.io/claim).

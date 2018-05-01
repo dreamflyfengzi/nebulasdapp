@@ -1,4 +1,4 @@
-# Web Wallet
+# Web-Wallet
 
 * Web Wallet: [https://github.com/nebulasio/web-wallet](https://github.com/nebulasio/web-wallet)
 * 中文
