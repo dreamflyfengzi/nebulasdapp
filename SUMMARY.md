@@ -14,7 +14,7 @@
     * [申请NAS测试币](tutorials/quick-start/token-claim.md)
     * [你的第一个app](tutorials/quick-start/your-first-dapp.md)
     * [部署智能合约](tutorials/quick-start/deploy.md)
-    * [调用](tutorials/quick-start/call.md)
+    * [执行智能合约](tutorials/quick-start/call.md)
   * [环境安装](tutorials/env.md)
   * [Case展示](tutorials/cases.md)
 * [API&组件](api/README.md)
