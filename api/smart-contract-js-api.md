@@ -1,37 +1,46 @@
-# Smart Contract API
-
+# Smart Contract JS API
 
 ## Global Objects
 
 ### console
 
-The ```console``` module provides a simple debugging console that is similar to the JavaScript console mechanism provided by web browsers.
+The `console` module provides a simple debugging console that is similar to the JavaScript console mechanism provided by web browsers.
 
-The global console can be used without calling ```require('console')```.
+The global console can be used without calling `require('console')`.
 
-#### console.info([...args])
-* ```...args <any>```
-The console.info() function is an alias for ```console.log()```.
+#### console.info\(\[...args\]\)
 
-#### console.log([...args])
-* ```...args <any>```
-Print ```args``` to Nebulas Logger at level ```info```.
+* `...args <any>`
 
-#### console.debug([...args])
-* ```...args <any>```
-Print ```args``` to Nebulas Logger at level ```debug```.
+  The console.info\(\) function is an alias for `console.log()`.
 
-#### console.warn([...args])
-* ```...args <any>```
-Print ```args``` to Nebulas Logger at level ```warn```.
+#### console.log\(\[...args\]\)
 
-#### console.error([...args])
-* ```...args <any>```
-Print ```args``` to Nebulas Logger at level ```error```.
+* `...args <any>`
+
+  Print `args` to Nebulas Logger at level `info`.
+
+#### console.debug\(\[...args\]\)
+
+* `...args <any>`
+
+  Print `args` to Nebulas Logger at level `debug`.
+
+#### console.warn\(\[...args\]\)
+
+* `...args <any>`
+
+  Print `args` to Nebulas Logger at level `warn`.
+
+#### console.error\(\[...args\]\)
+
+* `...args <any>`
+
+  Print `args` to Nebulas Logger at level `error`.
 
 ### LocalContractStorage
 
-The ```LocalContractStorage``` module provides a state trie based storage capability. It accepts string only key value pairs. And all data are stored to a private state trie associated with current contract address, only the contract can access them.
+The `LocalContractStorage` module provides a state trie based storage capability. It accepts string only key value pairs. And all data are stored to a private state trie associated with current contract address, only the contract can access them.
 
 ```typescript
 interface Descriptor {
@@ -106,20 +115,19 @@ interface StorageMap {
 
 The `BigNumber` module use the [bignumber.js](https://github.com/MikeMcl/bignumber.js), a JavaScript library for arbitrary-precision decimal and non-decimal arithmetic. The contract can use `BigNumber` directly to handle the value of the transaction and other values transfer.
 
-```js
-
+```javascript
 var value = new BigNumber(0);
 value.plus(1);
 ...
 ```
 
 ### Blockchain
+
 The `Blockchain` module provides a object for contracts to obtain transactions and blocks executed by the current contract. Also, the NAS can be transferred from the contract and the address check is provided.
 
 Blockchain API:
 
-```js
-
+```javascript
 // current block 
 Blockchain.block;
 
@@ -131,41 +139,40 @@ Blockchain.transfer(address, value);
 
 // verify address
 Blockchain.verifyAddress(address);
-
 ```
+
 properties:
 
-- `block`: current block for contract execution
-	- `timestamp`: block timestamp
-	- `hash`: block hash
-	- `height`: block height
-- `transaction`: current transaction for contract execution
-	- `hash`: transaction hash
-	- `from`: transaction from address
-	- `to`: transaction to address
-	- `value`: transaction value, a BigNumber object for contract use
-	- `nonce`: transaction nonce
-	- `timestamp`: transaction timestamp
-	- `gasPrice`: transaction gasPrice, a BigNumber object for contract use
-	- `gasLimit`: transaction gasLimit, a BigNumber object for contract use
-- `transfer(address, value)`: transfer NAS from contract to address
-	- params:
-		- `address`: nebulas address to receive NAS
-		- `value`: transfer value, a BigNumber object
-	- return:
-		- `0`: transfer success
-		- `1`: transfer failed   
-- `verifyAddress(address)`: verify address
-	- params:
-		- `address`: address need to check
-	- return:
-		- `1`: address is valid
-		- `0`: address is invalid 
+* `block`: current block for contract execution
+  * `timestamp`: block timestamp
+  * `hash`: block hash
+  * `height`: block height
+* `transaction`: current transaction for contract execution
+  * `hash`: transaction hash
+  * `from`: transaction from address
+  * `to`: transaction to address
+  * `value`: transaction value, a BigNumber object for contract use
+  * `nonce`: transaction nonce
+  * `timestamp`: transaction timestamp
+  * `gasPrice`: transaction gasPrice, a BigNumber object for contract use
+  * `gasLimit`: transaction gasLimit, a BigNumber object for contract use
+* `transfer(address, value)`: transfer NAS from contract to address
+  * params:
+    * `address`: nebulas address to receive NAS
+    * `value`: transfer value, a BigNumber object
+  * return:
+    * `0`: transfer success
+    * `1`: transfer failed   
+* `verifyAddress(address)`: verify address
+  * params:
+    * `address`: address need to check
+  * return:
+    * `1`: address is valid
+    * `0`: address is invalid 
 
 Example to use:
 
-```js
-
+```javascript
 'use strict';
 
 var SampleContract = function () {
@@ -196,33 +203,32 @@ SampleContract.prototype = {
         var result = Blockchain.transfer(address, value);
         console.log("transfer result:", result);
         Event.Trigger("transfer", {
-			Transfer: {
-				from: Blockchain.transaction.to,
-				to: address,
-				value: value
-			}
-		});
+            Transfer: {
+                from: Blockchain.transaction.to,
+                to: address,
+                value: value
+            }
+        });
     },
     verifyAddress: function (address) {
-    	 var result = Blockchain.verifyAddress(address);
+         var result = Blockchain.verifyAddress(address);
         console.log("verifyAddress result:", result);
     }
 };
 
 module.exports = SampleContract;
-
 ```
 
 ### Event
 
 The `Event` module records execution events in contract. The recorded events are stored in the event trie on the chain, which can be fetched by `FetchEvents` method in block with the execution transaction hash. All contract event topics have a `chain.contract.` prefix before the topic they set in contract.
 
-```js
+```javascript
 Event.Trigger(topic, obj);
 ```
 
- - `topic`: user-defined topic
- - `obj`: JSON object
-
+* `topic`: user-defined topic
+* `obj`: JSON object
 
 You can see the example in `SampleContract` before.
+

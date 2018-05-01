@@ -2,14 +2,11 @@
 
 ## Abstract
 
-The following standard allows for the implementation of a standard API for tokens within smart contracts.
-This standard provides basic functionality to transfer tokens, as well as allows tokens to be approved so they can be spent by another on-chain third party.
-
+The following standard allows for the implementation of a standard API for tokens within smart contracts. This standard provides basic functionality to transfer tokens, as well as allows tokens to be approved so they can be spent by another on-chain third party.
 
 ## Motivation
 
 A standard interface allows that a new token can be created by any application easily : from wallets to decentralized exchanges.
-
 
 ## Methods
 
@@ -17,7 +14,7 @@ A standard interface allows that a new token can be created by any application e
 
 Returns the name of the token - e.g. `"MyToken"`.
 
-``` js
+```javascript
 // returns string, the name of the token.
 function name()
 ```
@@ -26,7 +23,7 @@ function name()
 
 Returns the symbol of the token. E.g. "TK".
 
-``` js
+```javascript
 // returns string, the symbol of the token 
 function symbol()
 ```
@@ -35,60 +32,52 @@ function symbol()
 
 Returns the number of decimals the token uses - e.g. `8`, means to divide the token amount by `100000000` to get its user representation.
 
-``` js
+```javascript
 // returns number, the number of decimals the token uses
 function decimals()
 ```
-
 
 #### totalSupply
 
 Returns the total token supply.
 
-``` js
+```javascript
 // returns string, the total token supply, the decimal value is decimals* total.
 function totalSupply()
 ```
 
 #### balanceOf
 
-Returns the account balance  of a address.
+Returns the account balance of a address.
 
-``` js
+```javascript
 // returns string, the account balance of another account with address
 function balanceOf(address)
 ```
 
 #### transfer
 
-Transfers `value` amount of tokens to `address `, and MUST fire the `Transfer` event.
-The function SHOULD `throw` if the `from` account balance does not have enough tokens to spend.
+Transfers `value` amount of tokens to `address`, and MUST fire the `Transfer` event. The function SHOULD `throw` if the `from` account balance does not have enough tokens to spend.
 
-*Note* Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+_Note_ Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
 
-``` js
+```javascript
 // returns `true`, if transfer success, else throw error
 function transfer(address, value)
 ```
-
-
 
 #### transferFrom
 
 Transfers `value` amount of tokens from address `from` to address `to`, and MUST fire the `Transfer` event.
 
-The `transferFrom` method is used for a withdraw workflow, allowing contracts to transfer tokens on your behalf.
-This can be used for example to allow a contract to transfer tokens on your behalf and/or to charge fees in sub-currencies.
-The function SHOULD `throw` unless the `from` account has deliberately authorized the sender of the message via some mechanism.
+The `transferFrom` method is used for a withdraw workflow, allowing contracts to transfer tokens on your behalf. This can be used for example to allow a contract to transfer tokens on your behalf and/or to charge fees in sub-currencies. The function SHOULD `throw` unless the `from` account has deliberately authorized the sender of the message via some mechanism.
 
-*Note* Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
+_Note_ Transfers of 0 values MUST be treated as normal transfers and fire the `Transfer` event.
 
-``` js
+```javascript
 // returns `true`, if transfer success, else throw error
 function transferFrom(from, to, value)
 ```
-
-
 
 #### approve
 
@@ -96,7 +85,7 @@ Allows `spender` to withdraw from your account multiple times, up the `currentVa
 
 **NOTE**: To prevent attack vectors, the user needs to give a previous approve value, and the default value that is not approve is 0.
 
-``` js
+```javascript
 // returns `true`, if approve success, else throw error
 function approve(spender, currentValue, value)
 ```
@@ -105,13 +94,12 @@ function approve(spender, currentValue, value)
 
 Returns the amount which `spender` is still allowed to withdraw from `owner`.
 
-``` js
+```javascript
 // returns string, the value allowed to withdraw from `owner`.
 function allowance(owner, spender)
 ```
 
 ### Events
-
 
 #### transferEvent
 
@@ -119,26 +107,25 @@ MUST trigger when tokens are transferred, including zero value transfers.
 
 A token contract which creates new tokens SHOULD trigger a Transfer event with the `from` address set to `totalSupply` when tokens are created.
 
-``` js
+```javascript
 function transferEvent: function(status, from, to, value)
 ```
-
-
 
 #### approveEvent
 
 MUST trigger on any call to `approve(spender, currentValue, value)`.
 
-``` js
+```javascript
 function approveEvent: function(status, from, spender, value)
 ```
 
 ## Implementation
 
 #### Example implementations are available at
-- [NRC20.js](https://github.com/nebulasio/go-nebulas/blob/master/nf/nvm/test/NRC20.js)
 
-```js
+* [NRC20.js](https://github.com/nebulasio/go-nebulas/blob/master/nf/nvm/test/NRC20.js)
+
+```javascript
 'use strict';
 
 var Allowed = function (obj) {
@@ -349,5 +336,5 @@ StandardToken.prototype = {
 };
 
 module.exports = StandardToken;
-
 ```
+
