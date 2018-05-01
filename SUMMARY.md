@@ -6,7 +6,7 @@
   * [Dapp](introduction/dapp.md)
   * [Gas](introduction/gas.md)
   * [测试网](introduction/testnet.md)
-  * [主网](introduction/maintest.md)
+  * [主网](introduction/mainnet.md)
 * [简易教程](tutorials/README.md)
   * [开发流程](tutorials/dev-work.md)
   * [快速上手](tutorials/quick-start/README.md)
