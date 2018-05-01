@@ -1,4 +1,4 @@
 # API&组件
 
-api&组件包含了智能合约的介绍以及jsapi,rpcapi，rpcadmin和event的介绍，如果你是web开发，建议你重点关注在jsapi，如果你需要server建议你了解下rpcapi和rpcadmin。如果你关心tx的上链你可以留意下evnet
+API&组件包含了智能合约的介绍以及jsapi,rpcapi，rpcadmin和event的介绍，如果你是web开发，建议你重点关注在jsapi，如果你需要server建议你了解下rpcapi和rpcadmin。如果你关心tx的上链你可以留意下evnet
 
