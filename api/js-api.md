@@ -1,4 +1,4 @@
-# Smart Contract JS API
+# JS API
 
 ## Global Objects
 
