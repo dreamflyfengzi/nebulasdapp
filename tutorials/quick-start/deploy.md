@@ -6,7 +6,7 @@
 {% tabs %}
 {% tab title="Web Wallet" %}
 我们可以通过WebWallet快速部署，详情信息请点击下面的链接
-- [通过WebWallet部署智能合约](https://blog.nebulas.io/2018/04/28/deploy-a-smart-contract/)
+[通过WebWallet部署智能合约](https://blog.nebulas.io/2018/04/28/deploy-a-smart-contract/)
 {% endtab %}
 
 {% tab title="本地模式" %}
@@ -14,6 +14,7 @@
 如果还木有配本地环境请先跳过
 {% endhint %}
 
+在本地测试，我们可以直接使用`解锁 & 发送`的方式来发送交易。
 {% endtab %}
 
 {% tab title="测试模式" %}
