@@ -32,7 +32,7 @@ git clone https://github.com/nebulasio/web-wallet.git
 
 双击 index.html打开 ，这时会启动浏览器，打开一个保存在本地的网页，即Web版钱包。
 
-![Web Wallet](https://github.com/dreamflyfengzi/nebulasdapp/tree/175c8feafcd8552d0fa6b0d97f834ec8c10902b3/tutorials/resources/account-web-wallet.png)
+![Web Wallet](https://github.com/dreamflyfengzi/nebulasdapp/tree/master/tutorials/resources/account-web-wallet.png)
 
 新建钱包页面
 
@@ -50,7 +50,7 @@ git clone https://github.com/nebulasio/web-wallet.git
 
 点击下载密码库文件，保存到电脑上，这里包含了这个钱包内的私钥信息，因此请妥善保管，避免遗失或被盗。
 
-![Save Key](https://github.com/dreamflyfengzi/nebulasdapp/tree/175c8feafcd8552d0fa6b0d97f834ec8c10902b3/tutorials/resources/account-save-key.png)
+![Save Key](https://github.com/dreamflyfengzi/nebulasdapp/tree/master/tutorials/resources/account-save-key.png)
 
 注意：密码库文件可以用于断开网络，进行离线交易，这个钱包内的秘钥信息都包含在内，请妥善保管，如不慎丢失，会面临丢失对应数字资产的风险。
 

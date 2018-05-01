@@ -4,4 +4,5 @@
 
 Every email can claim some tokens every day
 
-![Claim Test Nas](https://github.com/dreamflyfengzi/nebulasdapp/tree/175c8feafcd8552d0fa6b0d97f834ec8c10902b3/tutorials/resources/claim-test-nas.png)
+![Claim Test Nas](https://github.com/dreamflyfengzi/nebulasdapp/tree/master/tutorials/resources/claim-test-nas.png)
+
