@@ -2,31 +2,29 @@
 
 * [Introduction](README.md)
 * [介绍](introduction/README.md)
-  * 星云链
+  * [星云链](introduction/nebulas.md)
   * [Dapp](introduction/dapp.md)
-  * 主网
-  * 测试网
-  * Gas
+  * [Gas](introduction/gas.md)
+  * [测试网](introduction/testnet.md)
+  * [主网](introduction/maintest.md)
 * [简易教程](tutorials/README.md)
-  * 开发流程
+  * [开发流程](tutorials/dev-work.md)
   * [快速上手](tutorials/quick-start/README.md)
-    * 创建账户
-    * 申请NAS测试币
+    * [创建账户](tutorials/quick-start/create-account.md)
+    * [申请NAS测试币](tutorials/quick-start/token-claim.md)
     * [你的第一个app](tutorials/quick-start/your-first-dapp.md)
     * [部署智能合约](tutorials/quick-start/deploy.md)
     * [调用](tutorials/quick-start/call.md)
-  * 环境安装
-  * Case展示
+  * [环境安装](tutorials/env.md)
+  * [Case展示](tutorials/cases.md)
 * [API&组件](api/README.md)
   * [Smart Contract](api/smart-contract.md)
   * [Smart Contract JS API](api/smart-contract-js-api.md)
   * [RPC API](api/rpc-api.md)
-  * RPC Admin
+  * [RPC Admin](api/rpc-admin.md)
 * [NRC](nrc/README.md)
   * [NRC20](nrc/nrc20.md)
   * [NRC721](nrc/nrc721.md)
 * [工具](tools/README.md)
   * [Web-Wallet](tools/web-wallet.md)
-* 浏览器
-* 社区
-
+  * [chrome plugins](tools/chrome-plugins.md)
