@@ -26,6 +26,7 @@
   * [NRC20](nrc/nrc20.md)
   * [NRC721](nrc/nrc721.md)
 * 工具
+  * [Web-Wallet](tools/webwallet.md)
 * 浏览器
 * 社区
 
