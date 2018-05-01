@@ -3,17 +3,39 @@
 上面介绍了在Nebulas中怎么去编写一个智能合约，现在我们需要把智能合约部署到链上。在Nebulas中部署一个智能合约其实也是发送一个transaction来实现.
 
 
-{% tabs first="First Tab", second="Second Tab", third="Third Tab" %}
+{% tabs %}
+{% tab title="Web Wallet" %}
+abc
 
-{% content "first" %}
+db
+
+```text
+test
+test
+```
+{% endtab %}
+
+{% tab title="本地模式" %}
+{% hint style="info" %}
+不错哦
+{% endhint %}
+{% endtab %}
+
+{% tab title="测试模式" %}
+测试模式
+{% endtab %}
+
+{% tab title="主网模式" %}
+主网模式
+{% endtab %}
+{% endtabs %}
+
+
 我们可以通过WebWallet快速部署，详情信息请点击下面的链接
 - [通过WebWallet部署智能合约](https://blog.nebulas.io/2018/04/28/deploy-a-smart-contract/)
 
 
-{% content "second" %}
-测试网模式
-
-{% content "third" %}
+### 测试网模式
 
 - 如果还木有配本地环境请先跳过
 
@@ -67,5 +89,3 @@
 > ```
 >
 > 如上所示，部署合约的交易的状态变成了1，表示合约部署成功了。
-
-{% endtabs %}
