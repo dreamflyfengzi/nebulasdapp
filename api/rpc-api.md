@@ -1,6 +1,6 @@
 # RPC API
 
-Remote Procedure Calls (RPCs) provide a useful abstraction for building distributed applications and services.
+Remote Procedure Calls \(RPCs\) provide a useful abstraction for building distributed applications and services.
 
 Nebulas provides both [gRPC](https://grpc.io) and RESTful API for users to interact with Nebulas.
 
@@ -9,17 +9,19 @@ Nebulas provides both [gRPC](https://grpc.io) and RESTful API for users to inter
 [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway) is a plugin of protoc. It reads gRPC service definition, and generates a reverse-proxy server which translates a RESTful JSON API into gRPC. we use it to map gRPC to HTTP.
 
 ## Endpoint
+
 Default endpoints:
 
 | API | URL | Protocol |
-|-------|:------------:|:------------:|
-| gRPC |  http://localhost:8684 | Protobuf|
-| RESTful |http://localhost:8685 | HTTP |
+| --- | :---: | :---: |
+| gRPC | [http://localhost:8684](http://localhost:8684) | Protobuf |
+| RESTful | [http://localhost:8685](http://localhost:8685) | HTTP |
 
-##### gRPC API
+#### gRPC API
+
 We can run the gRPC example [testing client code](https://github.com/nebulasio/go-nebulas/blob/develop/rpc/testing/client/main.go):
 
-```
+```text
 go run main.go
 ```
 
@@ -27,21 +29,25 @@ The testing client gets account state from sender address, makes a transaction f
 
 We can see client log output like:
 
-```
+```text
 GetAccountState n1QZMXSZtW7BUerroSms4axNfyBGyFGkrh5 nonce 4 value 3142831039999999999992
 SendTransaction n1QZMXSZtW7BUerroSms4axNfyBGyFGkrh5 -> n1Zn6iyyQRhqthmCfqGBzWfip1Wx8wEvtrJ value 2 txhash:"2c2f5404a2e2edb651dff44a2d114a198c00614b20801e58d5b00899c8f512ae"
 GetAccountState n1Zn6iyyQRhqthmCfqGBzWfip1Wx8wEvtrJ nonce 0 value 10
 ```
-##### HTTP
-Now we also provided HTTP to access the RPC API. The file that ends with **gw.go** is the mapping file.
-Now we can access the rpc API directly from our browser, you can update the **rpc_listen** and **http_listen** in **conf/default/config.conf** to change RPC/HTTP port.
 
-###### Example:
-```
+#### HTTP
+
+Now we also provided HTTP to access the RPC API. The file that ends with **gw.go** is the mapping file. Now we can access the rpc API directly from our browser, you can update the **rpc\_listen** and **http\_listen** in **conf/default/config.conf** to change RPC/HTTP port.
+
+**Example:**
+
+```text
 curl -i -H 'Content-Type: application/json' -X GET http://localhost:8685/v1/user/nebstate
 ```
+
 if success, response will be returned like this
-```
+
+```text
 {
     "result":{
         "chain_id":100,
@@ -54,47 +60,48 @@ if success, response will be returned like this
     }
 }
 ```
+
 Or, there is error form grpc, repose will carry the error message
-```
+
+```text
 {
     "error":"message..."
-} 
+}
 ```
-
 
 ## RPC methods
 
-* [GetNebState](#getnebstate)
-* [GetAccountState](#getaccountstate)
-* [LatestIrreversibleBlock](#latestirreversibleblock)
-* [Call](#call)
-* [SendRawTransaction](#sendrawtransaction)
-* [GetBlockByHash](#getblockbyhash)
-* [GetBlockByHeight](#getblockbyheight)
-* [GetTransactionReceipt](#gettransactionreceipt)
-* [GetGasPrice](#getgasprice)
-* [EstimateGas](#estimategas)
-* [GetEventsByHash](#geteventsbyhash)
-* [Subscribe](#subscribe)
-* [GetDynasty](#getdynasty)
+* [GetNebState](rpc-api.md#getnebstate)
+* [GetAccountState](rpc-api.md#getaccountstate)
+* [LatestIrreversibleBlock](rpc-api.md#latestirreversibleblock)
+* [Call](rpc-api.md#call)
+* [SendRawTransaction](rpc-api.md#sendrawtransaction)
+* [GetBlockByHash](rpc-api.md#getblockbyhash)
+* [GetBlockByHeight](rpc-api.md#getblockbyheight)
+* [GetTransactionReceipt](rpc-api.md#gettransactionreceipt)
+* [GetGasPrice](rpc-api.md#getgasprice)
+* [EstimateGas](rpc-api.md#estimategas)
+* [GetEventsByHash](rpc-api.md#geteventsbyhash)
+* [Subscribe](rpc-api.md#subscribe)
+* [GetDynasty](rpc-api.md#getdynasty)
 
 ## RPC API Reference
 
+### GetNebState
 
-
-#### GetNebState
 Return the state of the neb.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  GetNebState |
-| HTTP | GET |  /v1/user/nebstate |
+| --- | --- | --- |
+| gRpc |  | GetNebState |
+| HTTP | GET | /v1/user/nebstate |
 
+**Parameters**
 
-###### Parameters
 none
 
-###### Returns
+**Returns**
+
 `chain_id` Block chain id
 
 `tail` Current neb tail hash
@@ -109,8 +116,9 @@ none
 
 `version` neb version.
 
-###### HTTP Example
-```
+**HTTP Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X GET http://localhost:8685/v1/user/nebstate
 
@@ -127,29 +135,33 @@ curl -i -H 'Content-Type: application/json' -X GET http://localhost:8685/v1/user
     }
 }
 ```
-***
-#### GetAccountState
+
+### GetAccountState
+
 Return the state of the account. Balance and nonce of the given address will be returned.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  GetAccountState |
-| HTTP | POST |  /v1/user/accountstate |
+| --- | --- | --- |
+| gRpc |  | GetAccountState |
+| HTTP | POST | /v1/user/accountstate |
 
-###### Parameters
+**Parameters**
+
 `address` Hex string of the account addresss.
 
 `height` block account state with height. If not specified, use 0 as tail height.
 
-###### Returns
-`balance` Current balance in unit of 1/(10^18) nas.
+**Returns**
+
+`balance` Current balance in unit of 1/\(10^18\) nas.
 
 `nonce` Current transaction count.
 
 `type` The type of address, 87 stands for normal address and 88 stands for contract address
 
-###### HTTP Example
-```
+**HTTP Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/accountstate -d '{"address":"n1Z6SbjLuAEXfhX1UJvXT6BB5osWYxVg3F3"}'
 
@@ -162,20 +174,22 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
     }
 }
 ```
-***
 
-#### LatestIrreversibleBlock
+### LatestIrreversibleBlock
+
 Return the latest irreversible block.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  LatestIrreversibleBlock |
-| HTTP | GET |  /v1/user/lib |
+| --- | --- | --- |
+| gRpc |  | LatestIrreversibleBlock |
+| HTTP | GET | /v1/user/lib |
 
-##### Parameters
+#### Parameters
+
 none
 
-###### Returns
+**Returns**
+
 `hash` Hex string of block hash.
 
 `parent_hash` Hex string of block parent hash.
@@ -196,11 +210,11 @@ none
 
 `events_root` Hex string of event root.
 
-`consensus_root` 
+`consensus_root`
 
--  `Timestamp` time of consensus state
--  `Proposer`  proposer of current consensus state
--  `DynastyRoot` Hex string of dynasty root
+* `Timestamp` time of consensus state
+* `Proposer`  proposer of current consensus state
+* `DynastyRoot` Hex string of dynasty root
 
 `miner` the miner of this block
 
@@ -208,10 +222,11 @@ none
 
 `transactions` block transactions slice.
 
-- `transaction ` [GetTransactionReceipt](#gettransactionreceipt) response info.
+* `transaction` [GetTransactionReceipt](rpc-api.md#gettransactionreceipt) response info.
 
-##### HTTP Example
-```
+#### HTTP Example
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X GET http://localhost:8685/v1/user/lib
 
@@ -239,39 +254,39 @@ curl -i -H 'Content-Type: application/json' -X GET http://localhost:8685/v1/user
     }
 }
 ```
-***
 
+### Call
 
-
-#### Call
 Call a smart contract function. The smart contract must have been submited. Method calls are run only on the current node, not broadcast.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  Call |
-| HTTP | POST |  /v1/user/call |
+| --- | --- | --- |
+| gRpc |  | Call |
+| HTTP | POST | /v1/user/call |
 
-###### Parameters
+**Parameters**
 
 The parameters of the `call` method is the same as the [SendTransaction](https://github.com/nebulasio/wiki/blob/master/rpc_admin.md/#sendtransaction) parameters. Special attention:
 
-`to` Hex string of the receiver account addresss. **The value of `to` is a contract address.**
+`to` Hex string of the receiver account addresss. **The value of **`to`** is a contract address.**
 
 `contract` transaction contract object for call smart contract.
 
-* Sub properties(**`source` and `sourceType` are not need**):
-	* `function` the contract call function for call contarct function.
-	* `args` the params of contract. The args content is JSON string of parameters array.
+* Sub properties\(`source`** and **`sourceType`** are not need**\):
+  * `function` the contract call function for call contarct function.
+  * `args` the params of contract. The args content is JSON string of parameters array.
 
-###### Returns
+**Returns**
+
 `result` result of smart contract method call
 
 `execute_err` execute error
 
 `estimate_gas` estimate gas used
 
-###### HTTP Example
-```
+**HTTP Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/call -d '{"from":"n1Z6SbjLuAEXfhX1UJvXT6BB5osWYxVg3F3","to":"n1mL2WCZyRi1oELEugfCZoNAW3dt8QpHtJw","value":"0","nonce":3,"gasPrice":"1000000","gasLimit":"2000000","contract":{"function":"transferValue","args":"[500]"}}'
 
@@ -282,26 +297,29 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
    estimate_gas: "22208"
 }
 ```
-***
 
-#### SendRawTransaction
+### SendRawTransaction
+
 Submit the signed transaction. The transaction signed value should be return by [SignTransactionWithPassphrase](https://github.com/nebulasio/wiki/blob/master/rpc_admin.md#signtransactionwithpassphrase).
 
 | Protocol | Method | API |
-|----------|--------|-----|
+| --- | --- | --- |
 | gRpc |  | SendRawTransaction |
-| HTTP | POST |  /v1/user/rawtransaction |
+| HTTP | POST | /v1/user/rawtransaction |
 
-###### Parameters
+**Parameters**
+
 `data` Signed data of transaction
 
-###### Returns
+**Returns**
+
 `txhash` Hex string of transaction hash.
 
-`contract_address ` returns only for deploy contract transaction.
+`contract_address` returns only for deploy contract transaction.
 
-###### HTTP Example
-```
+**HTTP Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/rawtransaction -d '{"data":"CiCrHtxyyIJks2/RErvBBA862D6iwAaGQ9OK1NisSGAuTBIYGiY1R9Fnx0z0uPkWbPokTeBIHFFKRaosGhgzPLPtjEF5cYRTgu3jz2egqWJwwF/i9wAiEAAAAAAAAAAADeC2s6dkAAAoAjDd/5jSBToICgZiaW5hcnlAZEoQAAAAAAAAAAAAAAAAAA9CQFIQAAAAAAAAAAAAAAAAAABOIFgBYkGLnnvGZEDSlocc202ZRWtUlbl2RHfGNdBY5eajFiHKThfgXIwGixh17LpnZGnYHlmfiGe2zqnFHdj7G8b2XIP2AQ=="}'
 
@@ -313,8 +331,9 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
 }
 ```
 
-###### Deploy Contract Example
-```
+**Deploy Contract Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/rawtransaction -d '{"data":"CiDam3G9Sy5fV6/ZcjasYPwSF39ZJDIHNB0Us94vn6p6ohIaGVfLzJ83pom1DO1gD307f1JdTVdDLzbMXO4aGhlXy8yfN6aJtQztYA99O39SXU1XQy82zFzuIhAAAAAAAAAAAAAAAAAAAAAAKBswwfTs1QU64AcKBmRlcGxveRLVB3siU291cmNlVHlwZSI6ImpzIiwiU291cmNlIjoiJ3VzZSBzdHJpY3QnXG5cbnZhciBUcmFuc2ZlclZhbHVlQ29udHJhY3QgPSBmdW5jdGlvbiAoKSB7XG4gICAgLy8gTG9jYWxDb250cmFjdFN0b3JnZS5kZWZpbmVQcm9wZXJ0aWVzKHRoaXMsIHtcbiAgICAvLyAgICAgdG90YWxCYWxhbmNlOiBudWxsXG4gICAgLy8gfSlcbn1cblxuXG5UcmFuc2ZlclZhbHVlQ29udHJhY3QucHJvdG90eXBlID0ge1xuICAgICBpbml0OiBmdW5jdGlvbigpIHtcbiAgICAvLyAgICAgdGhpcy50b3RhbEJhbGFuY2UgPSAwO1xuICAgICB9LFxuXG4gICAgdHJhbnNmZXI6IGZ1bmN0aW9uKHRvKSB7XG4gICAgICAgIHZhciByZXN1bHQgPSBCbG9ja2NoYWluLnRyYW5zZmVyKHRvLCBCbG9ja2NoYWluLnRyYW5zYWN0aW9uLnZhbHVlKTtcbiAgICAgICAgLy8gdmFyIHJlc3VsdCA9IEJsb2NrY2hhaW4udHJhbnNmZXIodG8sIDApO1xuICAgICAgICBpZiAoIXJlc3VsdCkge1xuXHQgICAgXHR0aHJvdyBuZXcgRXJyb3IoXCJ0cmFuc2ZlciBmYWlsZWQuXCIpO1xuICAgICAgICB9XG4gICAgICAgIHJldHVybiBCbG9ja2NoYWluLnRyYW5zYWN0aW9uLnZhbHVlO1xuICAgIH0sXG4gICAgdHJhbnNmZXJTcGVjaWFsVmFsdWU6IGZ1bmN0aW9uKHRvLCB2YWx1ZSkge1xuICAgICAgICB2YXIgYW1vdW50ID0gbmV3IEJpZ051bWJlcih2YWx1ZSk7XG4gICAgICAgIHZhciByZXN1bHQgPSBCbG9ja2NoYWluLnRyYW5zZmVyKHRvLCBhbW91bnQpO1xuICAgICAgICAvLyB2YXIgcmVzdWx0ID0gQmxvY2tjaGFpbi50cmFuc2Zlcih0bywgMCk7XG4gICAgICAgIGlmICghcmVzdWx0KSB7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoXCJ0cmFuc2ZlciBmYWlsZWQuXCIpO1xuICAgICAgICB9IGVsc2Uge1xuICAgICAgICAgICAgcmV0dXJuIDBcbiAgICAgICAgfVxuICAgIH0sXG4gICAgXG59XG5tb2R1bGUuZXhwb3J0cyA9IFRyYW5zZmVyVmFsdWVDb250cmFjdDsifUBkShAAAAAAAAAAAAAAAAAAD0JAUhAAAAAAAAAAAAAAAAABMS0AWAFiQcJUX32jGcduxnJCjvJ9kRcGXhSK2+h3Tb46ySjAToGAY11C7mysGEU11OE6YTd+WNAo/CEbThvI0iKcjHhgBZUB"}'
 
@@ -326,26 +345,29 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
     }
 }
 ```
-***
 
-#### GetBlockByHash
+### GetBlockByHash
+
 Get block header info by the block hash.
 
 | Protocol | Method | API |
-|----------|--------|-----|
+| --- | --- | --- |
 | gRpc |  | GetBlockByHash |
-| HTTP | POST |  /v1/user/getBlockByHash |
+| HTTP | POST | /v1/user/getBlockByHash |
 
-###### Parameters
+**Parameters**
+
 `hash` Hex string of transaction hash.
 
 `full_fill_transaction` If true it returns the full transaction objects, if false only the hashes of the transactions.
 
-###### Returns
-See [LatestIrreversibleBlock](#latestirreversibleblock) response.
+**Returns**
 
-###### HTTP Example
-```
+See [LatestIrreversibleBlock](rpc-api.md#latestirreversibleblock) response.
+
+**HTTP Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/getBlockByHash -d '{"hash":"00000658397a90df6459b8e7e63ad3f4ce8f0a40b8803ff2f29c611b2e0190b8", "full_fill_transaction":"true"}'
 
@@ -387,26 +409,29 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
     }
 }
 ```
-***
 
-#### GetBlockByHeight
+### GetBlockByHeight
+
 Get block header info by the block height.
 
 | Protocol | Method | API |
-|----------|--------|-----|
+| --- | --- | --- |
 | gRpc |  | GetBlockByHeight |
-| HTTP | POST |  /v1/user/getBlockByHeight |
+| HTTP | POST | /v1/user/getBlockByHeight |
 
-###### Parameters
+**Parameters**
+
 `height` Height of transaction hash.
 
 `full_fill_transaction` If true it returns the full transaction objects, if false only the hashes of the transactions.
 
-###### Returns
-See [LatestIrreversibleBlock](#latestirreversibleblock) response.
+**Returns**
 
-###### HTTP Example
-```
+See [LatestIrreversibleBlock](rpc-api.md#latestirreversibleblock) response.
+
+**HTTP Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/getBlockByHeight -d '{"height": 256, "full_fill_transaction": true}'
 
@@ -448,20 +473,22 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
     }
 }
 ```
-***
 
-#### GetTransactionReceipt
-Get transactionReceipt info by tansaction hash. If the transaction     not submit or only submit and not packaged on chain, it will reurn not found error.
+### GetTransactionReceipt
+
+Get transactionReceipt info by tansaction hash. If the transaction not submit or only submit and not packaged on chain, it will reurn not found error.
 
 | Protocol | Method | API |
-|----------|--------|-----|
+| --- | --- | --- |
 | gRpc |  | GetTransactionReceipt |
-| HTTP | POST |  /v1/user/getTransactionReceipt |
+| HTTP | POST | /v1/user/getTransactionReceipt |
 
-###### Parameters
+**Parameters**
+
 `hash` Hex string of transaction hash.
 
-###### Returns
+**Returns**
+
 `hash` Hex string of tx hash.
 
 `chainId` Transaction chain id.
@@ -490,8 +517,9 @@ Get transactionReceipt info by tansaction hash. If the transaction     not submi
 
 `gas_used` transaction gas used
 
-###### HTTP Example
-```
+**HTTP Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/getTransactionReceipt -d '{"hash":"cda54445ffccf4ea17f043e86e54be11b002053f9edbe30ae1fbc0437c2b6a73"}'
 
@@ -515,34 +543,37 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
     }
 }
 ```
-***
 
-#### Subscribe
-Return  the subscribed events of transaction & block. The request is a keep-alive connection.
+### Subscribe
+
+Return the subscribed events of transaction & block. The request is a keep-alive connection.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  Subscribe |
-| HTTP | POST |  /v1/user/subscribe |
+| --- | --- | --- |
+| gRpc |  | Subscribe |
+| HTTP | POST | /v1/user/subscribe |
 
-##### Parameters
+#### Parameters
+
 `topics` repeated event topic name, string array.
 
 The topic name list:
 
-- `chain.pendingTransaction` The topic of pending a transaction in transaction_pool.
-- `chain.latestIrreversibleBlock` The topic of updating latest irreversible block.
-- `chain.transactionResult` The topic of executing & submitting tx.
-- `chain.newTailBlock` The topic of setting new tail block.
-- `chain.revertBlock` The topic of reverting block.
+* `chain.pendingTransaction` The topic of pending a transaction in transaction\_pool.
+* `chain.latestIrreversibleBlock` The topic of updating latest irreversible block.
+* `chain.transactionResult` The topic of executing & submitting tx.
+* `chain.newTailBlock` The topic of setting new tail block.
+* `chain.revertBlock` The topic of reverting block.
 
-##### Returns
+#### Returns
+
 `topic` subscribed event topic name.
 
 `data` subscribed event data.
 
-##### HTTP Example
-```
+#### HTTP Example
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/subscribe -d '{"topics":["chain.linkBlock", "chain.pendingTransaction"]}'
 
@@ -569,24 +600,27 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
     ...
 }
 ```
-***
 
-#### GetGasPrice
+### GetGasPrice
+
 Return current gasPrice.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  GetGasPrice |
-| HTTP | GET |  /v1/user/getGasPrice |
+| --- | --- | --- |
+| gRpc |  | GetGasPrice |
+| HTTP | GET | /v1/user/getGasPrice |
 
-##### Parameters
+#### Parameters
+
 none
 
-##### Returns
+#### Returns
+
 `gas_price` gas price. The unit is 10^-18 NAS.
 
-##### HTTP Example
-```js
+#### HTTP Example
+
+```javascript
 // Request
 curl -i -H 'Content-Type: application/json' -X GET http://localhost:8685/v1/user/getGasPrice
 
@@ -597,27 +631,29 @@ curl -i -H 'Content-Type: application/json' -X GET http://localhost:8685/v1/user
     }
 }
 ```
-***
 
-#### EstimateGas
+### EstimateGas
+
 Return the estimate gas of transaction.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  EstimateGas |
-| HTTP | POST |  /v1/user/estimateGas |
+| --- | --- | --- |
+| gRpc |  | EstimateGas |
+| HTTP | POST | /v1/user/estimateGas |
 
-##### Parameters
-The parameters of the `EstimateGas` method is the same as the
-[SendTransaction](https://github.com/nebulasio/wiki/blob/master/rpc_admin.md/#sendtransaction)parameters.
+#### Parameters
 
-##### Returns
+The parameters of the `EstimateGas` method is the same as the [SendTransaction](https://github.com/nebulasio/wiki/blob/master/rpc_admin.md/#sendtransaction)parameters.
+
+#### Returns
+
 `gas` the estimate gas.
 
 `err` error message of the transaction executing
 
-##### HTTP Example
-```
+#### HTTP Example
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/estimateGas -d '{"from":"n1QZMXSZtW7BUerroSms4axNfyBGyFGkrh5","to":"n1SAeQRVn33bamxN4ehWUT7JGdxipwn8b17", "value":"1000000000000000000","nonce":1,"gasPrice":"1000000","gasLimit":"2000000"}'
 
@@ -627,26 +663,30 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
     "err":""
 }
 ```
-***
 
-#### GetEventsByHash
+### GetEventsByHash
+
 Return the events list of transaction.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  GetEventsByHash |
-| HTTP | POST |  /v1/user/getEventsByHash |
+| --- | --- | --- |
+| gRpc |  | GetEventsByHash |
+| HTTP | POST | /v1/user/getEventsByHash |
 
-##### Parameters
+#### Parameters
+
 `hash` Hex string of transaction hash.
 
-##### Returns
-`events` the events list.
-- `topic` event topic;
-- `data` event data.
+#### Returns
 
-##### HTTP Example
-```
+`events` the events list.
+
+* `topic` event topic;
+* `data` event data.
+
+#### HTTP Example
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/getEventsByHash -d '{"hash":"ec239d532249f84f158ef8ec9262e1d3d439709ebf4dd5f7c1036b26c6fe8073"}'
 
@@ -665,25 +705,27 @@ curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/use
     }
 }
 ```
-***
 
-#### GetDynasty
+### GetDynasty
+
 GetDynasty get dpos dynasty.
 
 | Protocol | Method | API |
-|----------|--------|-----|
-| gRpc |  |  GetDynasty |
-| HTTP | POST |  /v1/user/dynasty |
+| --- | --- | --- |
+| gRpc |  | GetDynasty |
+| HTTP | POST | /v1/user/dynasty |
 
+**Parameters**
 
-###### Parameters
 `height` block height
 
-###### Returns
+**Returns**
+
 `miners` repeated string of miner address.
 
-###### HTTP Example
-```
+**HTTP Example**
+
+```text
 // Request
 curl -i -H 'Content-Type: application/json' -X POST http://localhost:8685/v1/user/dynasty -d '{"height": 1}'
 
