@@ -10,7 +10,7 @@
 [通过WebWallet部署智能合约](https://blog.nebulas.io/2018/04/28/deploy-a-smart-contract/)
 {% endtab %}
 
-{% tab title="本地模式" %}
+{% tab title="本地CURL模式" %}
 {% hint style="info" %}
 如果还木有配本地环境请先跳过
 {% endhint %}
@@ -67,11 +67,11 @@
 
 {% endtab %}
 
-{% tab title="测试模式" %}
+{% tab title="测试网CURL模式" %}
 测试模式
 {% endtab %}
 
-{% tab title="主网模式" %}
-主网模式
+{% tab title="主网CURL模式" %}
+通测试网CURL模式
 {% endtab %}
 {% endtabs %}

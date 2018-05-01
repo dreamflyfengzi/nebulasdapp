@@ -2,9 +2,17 @@
 
 在Nebulas中调用智能合约的方式也很简单，同样是通过发送交易来调用智能合约。
 
-## WebWallet模式
+{% tabs %}
+{% tab title="Web Wallet" %}
+我们可以通过WebWallet快速部署，详情信息请点击下面的链接
 
-## 本地环境模式
+[通过WebWallet部署智能合约](https://blog.nebulas.io/2018/04/28/deploy-a-smart-contract/)
+{% endtab %}
+
+{% tab title="本地CURL模式" %}
+{% hint style="info" %}
+如果还木有配本地环境请先跳过
+{% endhint %}
 
 ### 调用智能合约的`save`方法
 
@@ -68,3 +76,13 @@
 {"result":{"result":"{\"balance\":\"50\",\"expiryHeight\":\"84\"}","execute_err":"","estimate_gas":"20209"}}
 ```
 
+{% endtab %}
+
+{% tab title="测试网CURL模式" %}
+测试模式
+{% endtab %}
+
+{% tab title="主网CURL模式" %}
+通测试网CURL模式
+{% endtab %}
+{% endtabs %}
