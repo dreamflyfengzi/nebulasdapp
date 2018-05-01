@@ -2,12 +2,14 @@
 
 上面介绍了在Nebulas中怎么去编写一个智能合约，现在我们需要把智能合约部署到链上。在Nebulas中部署一个智能合约其实也是发送一个transaction来实现.
 
-### WebWallet模式
+## WebWallet模式
+
 我们可以通过WebWallet快速部署，详情信息请点击下面的链接
-- [通过WebWallet部署智能合约](https://blog.nebulas.io/2018/04/28/deploy-a-smart-contract/)
 
+* [通过WebWallet部署智能合约](https://blog.nebulas.io/2018/04/28/deploy-a-smart-contract/)
 
-### 本地环境模式 (如果还木有配本地环境请先跳过)
+## 本地环境模式 \(如果还木有配本地环境请先跳过\)
+
 在本地测试，我们可以直接使用`解锁 & 发送`的方式来发送交易。
 
 首先，我们在`conf/default/genesis.conf`中预分配过代币的账户里，选择账户`n1H4MYms9F55ehcvygwWE71J8tJC4CRr2so`作为本章的发送者账号，并检查该账户的状态。
